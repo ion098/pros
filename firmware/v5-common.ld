@@ -8,6 +8,10 @@ SECTIONS
   KEEP (*(.hot_init))
 } > HOT_MEMORY
 
+.assets : {
+   KEEP (*(.assets))
+} > RAM
+
 .text : {
    KEEP (*(.vectors))
    /* boot data should be exactly 32 bytes long */
