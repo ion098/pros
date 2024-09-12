@@ -26,6 +26,9 @@ extern const int   _PROS_COMPILE_TIMESTAMP_INT;
 extern unsigned __exidx_start;
 extern unsigned __exidx_end;
 
+extern unsigned __assets_start;
+extern unsigned __assets_end;
+
 // this expands to a bunch of:
 // extern void autonomous();
 #define FUNC(F) void F();
@@ -38,6 +41,8 @@ __attribute__((section(".hot_init"))) void install_hot_table(struct hot_table* c
 	tbl->compile_directory = _PROS_COMPILE_DIRECTORY;
 	tbl->__exidx_start = &__exidx_start;
 	tbl->__exidx_end = &__exidx_end;
+	tbl->__assets_start = &__assets_start;
+	tbl->__assets_end = &__assets_end;
 
 // this expands to a bunch of:
 // tbl->functions.autonomous = autonomous;

@@ -12,6 +12,9 @@ struct hot_table {
 #include "system/user_functions/list.h"
 #undef FUNC
 	} functions;
+
+	void* __assets_start;
+	void* __assets_end;
 };
 
 extern struct hot_table* const HOT_TABLE;
