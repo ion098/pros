@@ -42,9 +42,14 @@ typedef struct ser_file_arg {
 #define STDOUT_STREAM_ID 0x74756f73  // 'sout' little endian
 #define STDERR_STREAM_ID 0x72726573  // 'serr' little endian
 #define KDBG_STREAM_ID 0x6762646b    // 'kdbg' little endian
+#define GDBI_STREAM_ID 0x69626467    // 'gdbi' little endian
+#define GDBO_STREAM_ID 0x6f626467    // 'gdbo' little endian
 
-// This array contains the serial driver's arguments for the 4 reserved file
-// descriptors. The fact that this array matches the order of the 4 reserved
+#define GDBI_FILENO 7
+#define GDBO_FILENO 8
+
+// This array contains the serial driver's arguments for the 6 reserved file
+// descriptors. The fact that this array matches the order of the 6 reserved
 // file descriptors is mostly irrelevant. We do need to know which one is which,
 // but they get mapped in ser_driver_initialize.
 static ser_file_s_t RESERVED_SER_FILES[] = {
@@ -52,6 +57,8 @@ static ser_file_s_t RESERVED_SER_FILES[] = {
     {.stream_id = STDOUT_STREAM_ID, .flags = 0},
     {.stream_id = STDERR_STREAM_ID, .flags = 0},
     {.stream_id = KDBG_STREAM_ID, .flags = 0},
+	{.stream_id = GDBI_STREAM_ID, .flags = 0},
+	{.stream_id = GDBO_STREAM_ID, .flags = 0},
 };
 
 // These mutexes are initialized in ser_driver_initialize
@@ -339,4 +346,7 @@ void ser_driver_initialize(void) {
 	vfs_update_entry(STDOUT_FILENO, ser_driver, &(RESERVED_SER_FILES[1]));
 	vfs_update_entry(STDERR_FILENO, ser_driver, &(RESERVED_SER_FILES[2]));
 	vfs_update_entry(KDBG_FILENO, ser_driver, &(RESERVED_SER_FILES[3]));
+	vfs_update_entry(GDBI_FILENO, ser_driver, &(RESERVED_SER_FILES[4]));
+	vfs_update_entry(GDBO_FILENO, ser_driver, &(RESERVED_SER_FILES[5]));
+
 }
